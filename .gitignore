@@ -1,0 +1,15 @@
+# Gitignore for the project. Should include my VS installation, C++, and other library shinanegans.
+.vsidx
+.suo
+.db
+.json
+.slnx
+.vcxproj
+.exe
+.ilk
+.log
+.tlog
+.lastbuildstate
+.idb
+.pdb
+.exe
