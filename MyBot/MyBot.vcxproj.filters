@@ -311,5 +311,17 @@
     <ClInclude Include="dependencies\include\dpp-10.1\dpp\zlibcontext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bgsStarSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="powerplayStarSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmdrClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="monthlyLeaderboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

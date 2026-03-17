@@ -191,6 +191,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bgsStarSystem.h" />
+    <ClInclude Include="cmdrClass.h" />
     <ClInclude Include="dependencies\include\dpp-10.1\dpp\appcommand.h" />
     <ClInclude Include="dependencies\include\dpp-10.1\dpp\application.h" />
     <ClInclude Include="dependencies\include\dpp-10.1\dpp\auditlog.h" />
@@ -283,7 +285,9 @@
     <ClInclude Include="dependencies\include\dpp-10.1\dpp\win32_safe_warnings.h" />
     <ClInclude Include="dependencies\include\dpp-10.1\dpp\wsclient.h" />
     <ClInclude Include="dependencies\include\dpp-10.1\dpp\zlibcontext.h" />
+    <ClInclude Include="monthlyLeaderboard.h" />
     <ClInclude Include="MyBot.h" />
+    <ClInclude Include="powerplayStarSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
