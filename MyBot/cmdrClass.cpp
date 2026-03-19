@@ -2,7 +2,7 @@
 #include "cmdrClass.h"
 
 cmdrClass::cmdrClass() {
-	userID = 0;
+	cmdrName = "";
 	rank = "";
 	bonds = 0;
 	bounties = 0;
@@ -17,7 +17,7 @@ cmdrClass::cmdrClass() {
 }
 
 std::ostream &operator<<(std::ostream& out, const cmdrClass& c) {
-	out << c.userID;
+	out << c.cmdrName;
 	out << c.rank;
 	out << c.bonds;
 	out << c.bounties;
@@ -33,7 +33,7 @@ std::ostream &operator<<(std::ostream& out, const cmdrClass& c) {
 }
 
 std::istream& operator>>(std::istream& in, cmdrClass& c) {
-	in >> c.userID;
+	in >> c.cmdrName;
 	in >> c.rank;
 	in >> c.bonds;
 	in >> c.bounties;

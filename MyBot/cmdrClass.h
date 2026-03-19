@@ -5,7 +5,7 @@
 
 class cmdrClass {
 private:
-	dpp::snowflake userID;
+	std::string cmdrName;
 	std::string rank;
 protected:
 	int bonds;
@@ -26,7 +26,7 @@ public:
 	friend std::ostream &operator<<(std::ostream &out, const cmdrClass& c);
 	friend std::istream &operator>>(std::istream &in, cmdrClass& c);
 	// Accessors
-	dpp::snowflake getUserID() const { return userID; }
+	std::string getCmdrName() const { return cmdrName; }
 	std::string getRank() const { return rank; }
 	int getBonds() const { return bonds; }
 	int getBounties() const { return bounties; }
@@ -39,7 +39,8 @@ public:
 	int getWarband() const { return warband; }
 	int getBlackMarket() const { return blackMarket; }
 	// Mutators
-	void setUserID(dpp::snowflake data) { userID = data; }
+	void setCmdrName(std::string data) { cmdrName = data; }
+	void setRank(std::string data) { rank = data; }
 	void setBonds(int data) { bonds = data; }
 	void setBounties(int data) { bounties = data; }
 	void setExploration(int data) { exploration = data; }
