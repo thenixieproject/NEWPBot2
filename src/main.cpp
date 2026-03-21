@@ -1,3 +1,10 @@
+/* Current Issues
+ * Memory is leaking on what should be dynamically allocated objects, which means they need to be created, backed up
+ * to storage, and then destroyed. Consider databasing locally, writing to JSON file, or txt file. ENSURE MEMORY IS
+ * DEALLOCATED, THE PROGRAM CURRENTLY LEAKS MEMORY AND ASSIGNS IT TO OBJECTS INEFFICIENTLY. Memory inefficiency doesn't
+ * matter as much when it's deallocated properly.
+ */
+
 // Library Inclusions
 #include <dpp/dpp.h>
 // Header Inclusions
@@ -16,15 +23,41 @@ int main() {
 
 	// Handle slash commands
 	bot.on_slashcommand([](const dpp::slashcommand_t& event) {
-		if (event.command.get_command_name() == "ping") {
-			event.reply("Pong!");
+		if (event.command.get_command_name() == "createnewuser") {
+			// Fetch parameter value from command options
+			dpp::snowflake user_id = std::get<dpp::snowflake>(event.get_parameter("user"));
+
+			// Get member object from resolved list
+			dpp::guild_member resolved_member = event.command.get_resolved_member(user_id);
+
+			// Create new cmdr clas object for the user, set nickname, and rank
+			cmdrClass* cmdr = new cmdrClass();
+			cmdr->setCmdrName(resolved_member.get_nickname());
+			cmdr->setRank("Faction Ops");
+
+			// Reply that a new member was created
+			event.reply("Object for " + cmdr->getCmdrName() + " was created.");
+		}
+	});
+
+	// Clear slash command before running new ones
+	bot.on_ready([&bot](const dpp::ready_t& event) {
+		if (dpp::run_once<struct clear_bot_commands>()) {
+			bot.global_bulk_command_delete();
 		}
 	});
 
 	// Register slash commands
 	bot.on_ready([&bot](const dpp::ready_t& event) {
 		if (dpp::run_once<struct register_bot_commands>()) {
-			bot.global_command_create(dpp::slashcommand("ping", "Ping pong!", bot.me.id));
+			// Register command name
+			dpp::slashcommand createnewuser("createnewuser", "Create a new user", bot.me.id);
+
+			// Add command options
+			createnewuser.add_option(dpp::command_option(dpp::co_user, "user", "user to create", true));
+
+			// Creat the command
+			bot.global_command_create(createnewuser);
 		}
 	});
 

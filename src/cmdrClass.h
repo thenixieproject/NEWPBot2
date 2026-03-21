@@ -21,7 +21,7 @@ protected:
 public:
 	// Constructor and Destructor Functions
 	cmdrClass();
-	//~cmdrClass();
+	~cmdrClass();
 	// Overloaded I/O operators
 	friend std::ostream &operator<<(std::ostream &out, const cmdrClass& c);
 	friend std::istream &operator>>(std::istream &in, cmdrClass& c);

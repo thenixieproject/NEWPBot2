@@ -8,6 +8,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 # Create executable
 add_executable(${PROJECT_NAME}
     src/main.cpp
+    src/cmdrclass.cpp
 )
 
 # Find DPP package
