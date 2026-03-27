@@ -1,10 +1,20 @@
 {
-  "name": "NEWPBot2",
+  "name": "newpbot2",
   "version": "1.0.0",
-  "description": "",
+  "description": "A new and improved Discord Bot for the NEWP Discord Server",
+  "homepage": "https://github.com/thenixieproject/NEWPBot2#readme",
+  "bugs": {
+    "url": "https://github.com/thenixieproject/NEWPBot2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thenixieproject/NEWPBot2.git"
+  },
+  "license": "GPL-3.0-or-later",
+  "author": "Quinn McFarland / thenixieproject",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "private": true
+  }
 }
