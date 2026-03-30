@@ -27,7 +27,7 @@ async function writeCmdrData(nick) {
     const jsonString = JSON.stringify(user, null, 4);
     // Write the new user data to file
     try {
-        fs.writeFile(`./userdata/${nick}.json`, jsonString);
+       await fs.writeFile(`./userdata/${nick}.json`, jsonString);
     } catch (err) {
         console.error(err);
     }
@@ -44,8 +44,7 @@ module.exports = {
                 .setDescription('The new user to onboard')
                 .setRequired(true)),
     async execute(interaction) {
-        const targetUser = interaction.options.getUser('target');
-        const targetName = targetUser.username;
+        const targetName = interaction.options.getUser('target').username;
 
         await writeCmdrData(targetName);
         await interaction.reply(`Created new user: ${targetName}`)
