@@ -1,7 +1,7 @@
 // Library and Module Imports
 const { SlashCommandBuilder } = require('discord.js');
 const fs = require('fs').promises;
-const effortdata = require('effortdata.js');
+const effortdata = require('/Users/quinnmcfarland/Documents/GitHub/NEWPBot2/effortdata.js');
 
 // Command Execution
 module.exports = {
@@ -48,39 +48,39 @@ module.exports = {
             for (let i = 0; i < effortdata.activeBgsSystems.length; i++) {
                 if (systemName === effortdata.activeBgsSystems[i].name) {
                     if (activity.toLowerCase() === 'bonds') {
-                        await effortdata.activeBgsSystems[i].bonds += contributionValue;
+                        effortdata.activeBgsSystems[i].bonds += contributionValue;
                     } else if (activity.toLowerCase() === 'bounties') {
-                        await effortdata.activeBgsSystems[i].bounties += contributionValue;
+                        effortdata.activeBgsSystems[i].bounties += contributionValue;
                     } else if (activity.toLowerCase() === 'exploration') {
-                        await effortdata.activeBgsSystems[i].exploration += contributionValue;
+                        effortdata.activeBgsSystems[i].exploration += contributionValue;
                     } // War Effort calculations
                     else if (activity.toLowerCase() === 'lcz') {
-                        await effortdata.activeBgsSystems[i].warEffort += contributionValue;
+                        effortdata.activeBgsSystems[i].warEffort += contributionValue;
                     } else if (activity.toLowerCase() === 'mcz') {
-                        await effortdata.activeBgsSystems[i].warEffort += (contributionValue * 2);
+                        effortdata.activeBgsSystems[i].warEffort += (contributionValue * 2);
                     } else if (activity.toLowerCase() === 'hcz') {
-                        await effortdata.activeBgsSystems[i].warEffort += (contributionValue * 4);
+                        effortdata.activeBgsSystems[i].warEffort += (contributionValue * 4);
                     } else if (activity.toLowerCase() === 'glcz') {
-                        await effortdata.activeBgsSystems[i].warEffort += (contributionValue / 4);
+                        effortdata.activeBgsSystems[i].warEffort += (contributionValue / 4);
                     } else if (activity.toLowerCase() === 'gmcz') {
-                        await effortdata.activeBgsSystems[i].warEffort += (contributionValue / 2);
+                        effortdata.activeBgsSystems[i].warEffort += (contributionValue / 2);
                     } else if (activity.toLowerCase() === 'ghcz') {
-                        await effortdata.activeBgsSystems[i].warEffort += contributionValue;
+                        effortdata.activeBgsSystems[i].warEffort += contributionValue;
                     } // Continue other non-War Effort calculations
                     else if (activity.toLowerCase() === 'influence') {
-                        await effortdata.activeBgsSystems[i].influence += contributionValue
+                        effortdata.activeBgsSystems[i].influence += contributionValue
                     } else if (activity.toLowerCase() === 'installationdefense') {
-                        await effortdata.activeBgsSystems[i].installationDefense += contributionValue;
+                        effortdata.activeBgsSystems[i].installationDefense += contributionValue;
                     } else if (activity.toLowerCase() === 'murder') {
-                        await effortdata.activeBgsSystems[i].murder += contributionValue;
+                        effortdata.activeBgsSystems[i].murder += contributionValue;
                     } else if (activity.toLowerCase() === 'paxfails') {
-                        await effortdata.activeBgsSystems[i].paxFails += contributionValue;
+                        effortdata.activeBgsSystems[i].paxFails += contributionValue;
                     } else if (activity.toLowerCase() === 'trade') {
-                        await effortdata.activeBgsSystems[i].trade += contributionValue;
+                        effortdata.activeBgsSystems[i].trade += contributionValue;
                     } else if (activity.toLowerCase() === 'warband') {
-                        await effortdata.activeBgsSystems[i].warband += contributionValue;
+                        effortdata.activeBgsSystems[i].warband += contributionValue;
                     } else if (activity.toLowerCase() === 'blackmarket') {
-                        await effortdata.activeBgsSystems[i].blackMarket += contributionValue;
+                        effortdata.activeBgsSystems[i].blackMarket += contributionValue;
                     } else {
                         await interaction.reply({
                             content: 'You did not enter a valid activity. Check the pins for syntax',

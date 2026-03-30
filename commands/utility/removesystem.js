@@ -1,4 +1,5 @@
 const {SlashCommandBuilder} = require("discord.js");
+const effortdata = require('/Users/quinnmcfarland/Documents/GitHub/NEWPBot2/effortdata.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -20,19 +21,24 @@ module.exports = {
 
         // Search for the system and mark it for garbage collection
         if (systemType.toLowerCase() === 'bgs') {
-            for (let i = 0; i < activeBgsSystems.length; i++) {
-                if (activeBgsSystems[i].name === systemName) {
-                    await activeBgsSystems[i] = null;
+            for (let i = 0; i < effortdata.activeBgsSystems.length; i++) {
+                if (effortdata.activeBgsSystems[i].name === systemName) {
+                    effortdata.activeBgsSystems[i] = null;
                     break;
                 }
             }
         } else if (systemType.toLowerCase() === 'powerplay') {
-            for (let i = 0; i < activePowerplaySystems.length; i++) {
-                if (activePowerplaySystems[i].name === systemName) {
-                    await activePowerplaySystems[i] = null;
+            for (let i = 0; i < effortdata.activePowerplaySystems.length; i++) {
+                if (effortdata.activePowerplaySystems[i].name === systemName) {
+                    effortdata.activePowerplaySystems[i] = null;
                     break;
                 }
             }
+        } else {
+            interaction.reply ({
+                content: `[ERROR] System ${systemName} not found.`,
+                flags: MessageFlags.Ephemeral
+            });
         }
     },
 };

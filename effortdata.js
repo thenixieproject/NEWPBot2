@@ -1,4 +1,3 @@
-// Class Definitions
 // Parent class, which will contain only a name
 class StarSystem {
     constructor(name) {
@@ -73,4 +72,4 @@ class PowerplaySystem extends StarSystem {
 const activeBgsSystems = [];
 const activePowerplaySystems = [];
 
-export { StarSystem, BGSSystem, PowerplaySystem, activeBgsSystems, activePowerplaySystems };
+module.exports = { StarSystem, BGSSystem, PowerplaySystem, activeBgsSystems, activePowerplaySystems };
