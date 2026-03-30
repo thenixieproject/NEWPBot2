@@ -197,20 +197,58 @@ module.exports = {
             for (system in activeBgsSystems) {
                 if (systemName === system.name) {
                     if (activity.toLowerCase() === 'bonds') {
-                        system.bonds += contributionValue;
+                        await system.bonds += contributionValue;
                     } else if (activity.toLowerCase() === 'bounties') {
-                        system.bounties += contributionValue;
+                        await system.bounties += contributionValue;
                     } else if (activity.toLowerCase() === 'exploration') {
-                        system.exploration += contributionValue;
-                    } else if (activity.toLowerCase() === 'lcz') {
-                        system.warEffort += contributionValue;
+                        await system.exploration += contributionValue;
+                    } // War Effort calculations
+                    else if (activity.toLowerCase() === 'lcz') {
+                        await system.warEffort += contributionValue;
                     } else if (activity.toLowerCase() === 'mcz') {
-                        system.warEffort += (contributionValue * 2);
+                        await system.warEffort += (contributionValue * 2);
                     } else if (activity.toLowerCase() === 'hcz') {
-                        system.warEffort += (contributionValue * 4);
+                        await system.warEffort += (contributionValue * 4);
+                    } else if (activity.toLowerCase() === 'glcz') {
+                        await system.warEffort += (contributionValue / 4);
+                    } else if (activity.toLowerCase() === 'gmcz') {
+                        await system.warEffort += (contributionValue / 2);
+                    } else if (activity.toLowerCase() === 'ghcz') {
+                        await system.warEffort += contributionValue;
+                    } // Continue other non-War Effort calculations
+                    else if (activity.toLowerCase() === 'influence') {
+                        await system.influence += contributionValue
+                    } else if (activity.toLowerCase() === 'installationdefense') {
+                        await system.installationDefense += contributionValue;
+                    } else if (activity.toLowerCase() === 'murder') {
+                        await system.murder += contributionValue;
+                    } else if (activity.toLowerCase() === 'paxfails') {
+                        await system.paxFails += contributionValue;
+                    } else if (activity.toLowerCase() === 'trade') {
+                        await system.trade += contributionValue;
+                    } else if (activity.toLowerCase() === 'warband') {
+                        await system.warband += contributionValue;
+                    } else if (acitivity.toLowerCase() === 'blackmarket') {
+                        await system.blackMarket += contributionValue;
+                    } else {
+                        await interaction.reply({
+                            content: 'You did not enter a valid activity. Check the pins for syntax',
+                            flags: MessageFlags.Ephemeral
+                        });
                     }
+                    break;
                 }
             }
         }
     }
+};
+
+// Display contribution board
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName('displayeffortboard')
+        .setDescription('Display current systems'),
+    async execute(interaction) {
+
+    },
 };
