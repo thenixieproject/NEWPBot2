@@ -13,7 +13,8 @@ class BGSSystem extends StarSystem {
         this._bonds = 0;
         this._bounties = 0;
         this._exploration = 0;
-        this._warEffort = 0;
+        this._spaceWarEffort = 0;
+        this._groundWarEffort
         this._influence = 0;
         this._installationDefense = 0;
         this._murder = 0;
@@ -26,7 +27,8 @@ class BGSSystem extends StarSystem {
     get bonds() { return this._bonds }
     get bounties() { return this._bounties }
     get exploration() { return this._exploration }
-    get warEffort() { return this._warEffort }
+    get spaceWarEffort() { return this._spaceWarEffort }
+    get groundWarEffort() { return this._groundWarEffort }
     get influence() { return this._influence }
     get installationDefense() { return this._installationDefense }
     get murder() { return this._murder }
@@ -39,7 +41,8 @@ class BGSSystem extends StarSystem {
     set bounties(value) { this._bounties = value }
     set exploration(value) { this._exploration = value }
     set influence(value) { this._influence = value }
-    set warEffort(value) { this._warEffort = value }
+    set spaceWarEffort(value) { this._spaceWarEffort = value }
+    set groundWarEffort(value) { this._groundWarEffort = value }
     set installationDefense(value) { this._installationDefense = value }
     set murder(value) { this._murder = value }
     set paxFails(value) { this._paxFails = value }
@@ -51,18 +54,18 @@ class BGSSystem extends StarSystem {
 class PowerplaySystem extends StarSystem {
     constructor (name) {
         super(name);
-        this._merits = 0;
+        this._controlPoints = 0;
         this._acquisition = 0;
         this._reinforcement = 0;
         this._undermining = 0;
     }
     // Getters
-    get merits() { return this._merits }
+    get controlPoints() { return this._controlPoints }
     get acquisition() { return this._acquisition }
     get reinforcement() { return this._reinforcement }
     get undermining() { return this._undermining }
     // Setters
-    set merits(value) { this._merits = value }
+    set controlPoints(value) { this._controlPoints = value }
     set acquisition(value) { this._acquisition = value }
     set reinforcement(value) { this._reinforcement = value }
     set undermining(value) { this._undermining = value }

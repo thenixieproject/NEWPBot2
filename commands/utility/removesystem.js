@@ -16,8 +16,8 @@ module.exports = {
                 .setDescription('Is this a bgs or powerplay system')
                 .setRequired(true)),
     async execute (interaction) {
-        const systemName = interaction.option.getString('name');
-        const systemType = interaction.option.getString('type');
+        const systemName = interaction.options.getString('name');
+        const systemType = interaction.options.getString('type');
 
         // Search for the system and mark it for garbage collection
         if (systemType.toLowerCase() === 'bgs') {

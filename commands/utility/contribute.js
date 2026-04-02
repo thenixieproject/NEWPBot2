@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const fs = require('fs').promises;
-const { StarSystem, BGSSystem, PowerplaySystem, activeBgsSystems, activePowerplaySystems } = require('/Users/quinnmcfarland/Documents/GitHub/NEWPBot2/effortdata.js');
+const { activeBgsSystems, activePowerplaySystems } = require('/Users/quinnmcfarland/Documents/GitHub/NEWPBot2/effortdata.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -27,31 +27,72 @@ module.exports = {
         // Get Interaction data
         const systemName = (interaction.options.getString('name')).toLowerCase();
         const activity = (interaction.options.getString('activity')).toLowerCase();
-        const contributionAmount = interaction.options.getNumber('amount');
+        let contributionAmount = interaction.options.getNumber('amount');
         const fileName = './userdata/' + interaction.user.username + '.json';
 
         // Get other relevant data
         let userData = await fs.readFile(fileName, 'utf8');
-        let amountToWrite = contributionAmount;
-        // Arrays are not finding indices properly
+        let amountToWrite;
         const powerplayIndex = activePowerplaySystems.findIndex((system) => {
-            return system == systemName;
+            return system.name === systemName;
         });
         const bgsIndex = activeBgsSystems.findIndex((system) => {
-            return system == systemName;
+            return system.name === systemName;
         });
 
-        // Write data to the relevant system
+        // Powerplay Logging to System
 
-        // Powerplay Logging
-        if (powerplayIndex > -1) {
-            if (activity === 'acquisition' || activity === 'reinforcement' || activity === 'undermining') {
-                activePowerplaySystems[powerplayIndex][activity] += contributionAmount;
-                activePowerplaySystems[powerplayIndex].merits += contributionAmount;
-                console.log(activePowerplaySystems[powerplayIndex]);
-                console.log(userData);
-                console.log(fileName);
+        // BGS Logging to System
+        try {
+            if (bgsIndex > -1) {
+                // non-war contributions
+                if (activity === 'blackMarket' || activity === 'bonds' || activity === 'bounties' || activity === 'exploration' ||
+                activity === 'influence' || activity === 'installationdefense' || activity === 'murder' || activity === 'paxfails' || activity === 'warband') {
+                    activeBgsSystems[bgsIndex][activity] += contributionAmount;
+                }
+                // Space War Effort Contributions
+                else if (activity === 'lcz') {
+                    activeBgsSystems[bgsIndex].spaceWarEffort += contributionAmount;
+                } else if (activity === 'mcz') {
+                    contributionAmount *= 2;
+                    activeBgsSystems[bgsIndex].spaceWarEffort += contributionAmount;
+                } else if (activity === 'hcz') {
+                    contributionAmount *= 3;
+                    activeBgsSystems[bgsIndex].spaceWarEffort += contributionAmount;
+                }
+                // Ground War Effort Contributions
+                else if (activity === 'glcz') {
+                    activeBgsSystems[bgsIndex].groundWarEffort += contributionAmount;
+                } else if (activity === 'gmcz') {
+                    contributionAmount *= 2;
+                    activeBgsSystems[bgsIndex].groundWarEffort += contributionAmount;
+                } else if (activity === 'ghcz') {
+                    contributionAmount *= 3;
+                    activeBgsSystems[bgsIndex].groundWarEfforrt += contributionAmount;
+                } else {
+                    interaction.editReply({
+                        content: `[ERROR] ${activity} is not a valid contribution activity.`,
+                        flags: MessageFlags.Ephemeral
+                    });
+                }
             }
+        } catch (error) {
+            console.error(error);
         }
+
+        // Write data to the user file
+        try {
+            // Overwrite old data with new data
+            amountToWrite = userData[activity] + contributionAmount;
+            userData[activity] = amountToWrite;
+
+            // Write new data to file
+            let newUserData = JSON.stringify(userData, null, 4);
+            await fs.writeFile(fileName, newUserData, 'utf8');
+        } catch (error) {
+            console.error(error);
+        }
+
+        interation.editReply(`${contributionAmount} points added to ${activity} in ${systemName}, logged by ${userData.name}`);
     },
 };

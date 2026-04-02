@@ -16,7 +16,7 @@ const user = {
     murder: 0,
     paxFails: 0,
     warBand: 0,
-    merits: 0
+    controlPoints: 0
 };
 
 // Helper Functions

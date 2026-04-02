@@ -1,5 +1,5 @@
-const {SlashCommandBuilder} = require('discord.js');
-const effortdata = require('/Users/quinnmcfarland/Documents/GitHub/NEWPBot2/effortdata.js');
+const { SlashCommandBuilder } = require('discord.js');
+const { PowerplaySystem, BGSSystem, activePowerplaySystems, activeBgsSystems} = require('/Users/quinnmcfarland/Documents/GitHub/NEWPBot2/effortdata.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,9 +26,10 @@ module.exports = {
         // Create the new system in the relevant array
         try {
             if (systemType === 'bgs') {
-                effortdata.activeBgsSystems.push(new effortdata.BGSSystem(systemName));
+                activeBgsSystems.push(new BGSSystem(systemName));
+                await interaction.editReply(`Created new system ${systemName}`);
             } else if (systemType === 'powerplay') {
-                effortdata.activePowerplaySystems.push(new effortdata.PowerplaySystem(systemName));
+                activePowerplaySystems.push(new PowerplaySystem(systemName));
                 await interaction.editReply(`Created new system ${systemName}`);
             } else {
                 await interaction.editReply({
