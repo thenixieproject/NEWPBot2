@@ -76,6 +76,18 @@ module.exports = {
                     });
                 }
             }
+
+            if (powerplayIndex > -1) {
+                console.log(`${systemName} found in powerplay array.`);
+            }
+
+            if (powerplayIndex === -1 && bgsIndex === -1)
+            {
+                interaction.editReply({
+                    content: `[ERROR] ${systemName} not found as a current system.`,
+                    flags: MessageFlags.Ephemeral
+                });
+            }
         } catch (error) {
             console.error(error);
         }
@@ -89,10 +101,9 @@ module.exports = {
             // Write new data to file
             let newUserData = JSON.stringify(userData, null, 4);
             await fs.writeFile(fileName, newUserData, 'utf8');
+            interaction.editReply(`${contributionAmount} points added to ${activity} in ${systemName}, logged by ${userData.name}`);
         } catch (error) {
             console.error(error);
         }
-
-        interation.editReply(`${contributionAmount} points added to ${activity} in ${systemName}, logged by ${userData.name}`);
     },
 };
