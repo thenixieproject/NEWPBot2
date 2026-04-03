@@ -4,8 +4,8 @@ const { activeBgsSystems, activePowerplaySystems} = require('/Users/quinnmcfarla
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('contribute')
-        .setDescription('Log your effort contributions')
+        .setName('contributionremoval')
+        .setDescription('Remove an erroneous contribution')
         .addStringOption((option) =>
             option
                 .setName('name')
@@ -47,28 +47,28 @@ module.exports = {
             if (bgsIndex > -1) {
                 // non-war contributions
                 if (activity === 'blackMarket' || activity === 'bonds' || activity === 'bounties' || activity === 'exploration' ||
-                activity === 'influence' || activity === 'installationdefense' || activity === 'murder' || activity === 'paxfails' || activity === 'warband') {
-                    activeBgsSystems[bgsIndex][activity] += contributionAmount;
+                    activity === 'influence' || activity === 'installationdefense' || activity === 'murder' || activity === 'paxfails' || activity === 'warband') {
+                    activeBgsSystems[bgsIndex][activity] -= contributionAmount;
                 }
                 // Space War Effort Contributions
                 else if (activity === 'lcz') {
-                    activeBgsSystems[bgsIndex].spaceWarEffort += contributionAmount;
+                    activeBgsSystems[bgsIndex].spaceWarEffort -= contributionAmount;
                 } else if (activity === 'mcz') {
                     contributionAmount *= 2;
-                    activeBgsSystems[bgsIndex].spaceWarEffort += contributionAmount;
+                    activeBgsSystems[bgsIndex].spaceWarEffort -= contributionAmount;
                 } else if (activity === 'hcz') {
                     contributionAmount *= 3;
-                    activeBgsSystems[bgsIndex].spaceWarEffort += contributionAmount;
+                    activeBgsSystems[bgsIndex].spaceWarEffort -= contributionAmount;
                 }
                 // Ground War Effort Contributions
                 else if (activity === 'glcz') {
-                    activeBgsSystems[bgsIndex].groundWarEffort += contributionAmount;
+                    activeBgsSystems[bgsIndex].groundWarEffort -= contributionAmount;
                 } else if (activity === 'gmcz') {
                     contributionAmount *= 2;
-                    activeBgsSystems[bgsIndex].groundWarEffort += contributionAmount;
+                    activeBgsSystems[bgsIndex].groundWarEffort -= contributionAmount;
                 } else if (activity === 'ghcz') {
                     contributionAmount *= 3;
-                    activeBgsSystems[bgsIndex].groundWarEfforrt += contributionAmount;
+                    activeBgsSystems[bgsIndex].groundWarEfforrt -= contributionAmount;
                 } else {
                     interaction.editReply({
                         content: `[ERROR] ${activity} is not a valid contribution activity.`,
@@ -79,14 +79,14 @@ module.exports = {
 
             if (powerplayIndex > -1) {
                 if (activity === 'acquisition') {
-                    activePowerplaySystems[powerplayIndex].acquisition += contributionAmount;
-                    activePowerplaySystems[powerplayIndex].controlPoints += Math.floor(contributionAmount / 4);
+                    activePowerplaySystems[powerplayIndex].acquisition -= contributionAmount;
+                    activePowerplaySystems[powerplayIndex].controlPoints -= Math.floor(contributionAmount / 4);
                 } else if (activity === 'reinforcement') {
-                    activePowerplaySystems[powerplayIndex].reinforcement += contributionAmount;
-                    activePowerplaySystems[powerplayIndex].controlPoints += Math.floor(contributionAmount / 2.08);
+                    activePowerplaySystems[powerplayIndex].reinforcement -= contributionAmount;
+                    activePowerplaySystems[powerplayIndex].controlPoints -= Math.floor(contributionAmount / 2.08);
                 } else if (activity === 'undermining') {
-                    activePowerplaySystems[powerplayIndex].undermining += contributionAmount;
-                    activePowerplaySystems[powerplayIndex].controlPoints += Math.floor(contributionAmount / 4.6);
+                    activePowerplaySystems[powerplayIndex].undermining -= contributionAmount;
+                    activePowerplaySystems[powerplayIndex].controlPoints -= Math.floor(contributionAmount / 4.6);
                 } else {
                     interaction.editReply({
                         content: `[ERROR] ${activity} is not a valid contribution activity.`,
@@ -109,14 +109,14 @@ module.exports = {
         // Write data to the user file
         try {
             // Overwrite old data with new data
-            amountToWrite = userData[activity] + contributionAmount;
+            amountToWrite = userData[activity] - contributionAmount;
             userData[activity] = amountToWrite;
 
             // Write new data to file
             let newUserData = JSON.stringify(userData, null, 4);
             await fs.writeFile(fileName, newUserData, 'utf8');
 
-            interaction.editReply(`${contributionAmount} points added to ${activity} in ${systemName}, logged by ${userData.username}`);
+            interaction.editReply(`${contributionAmount} points removed from ${activity} in ${systemName}, logged by ${userData.username}`);
         } catch (error) {
             console.error(error);
         }

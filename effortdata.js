@@ -70,9 +70,27 @@ class PowerplaySystem extends StarSystem {
     set reinforcement(value) { this._reinforcement = value }
     set undermining(value) { this._undermining = value }
 }
-
+class User {
+    constructor(name) {
+        this.username = name;
+        this.rank = "Faction Ops";
+        this.bonds = 0;
+        this.bounties = 0;
+        this.exploration = 0;
+        this.spaceWarEffort = 0;
+        this.groundWarEffort = 0;
+        this.influence = 0;
+        this.installationDefense = 0;
+        this.murder = 0;
+        this.paxFails = 0;
+        this.trade = 0;
+        this.warband = 0;
+        this.blackMarket = 0;
+        this.controlPoints = 0;
+    }
+}
 // Global Variables
 const activeBgsSystems = [];
 const activePowerplaySystems = [];
 
-module.exports = { StarSystem, BGSSystem, PowerplaySystem, activeBgsSystems, activePowerplaySystems };
+module.exports = { StarSystem, BGSSystem, PowerplaySystem, User, activeBgsSystems, activePowerplaySystems };
