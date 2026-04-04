@@ -14,7 +14,7 @@ class BGSSystem extends StarSystem {
         this._bounties = 0;
         this._exploration = 0;
         this._spaceWarEffort = 0;
-        this._groundWarEffort
+        this._groundWarEffort = 0;
         this._influence = 0;
         this._installationDefense = 0;
         this._murder = 0;
